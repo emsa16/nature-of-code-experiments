@@ -46,12 +46,26 @@
 
 //   position.add(velocity);
 
-//   if (position.x >= width - radius || position.x <= radius) {
-//     velocity.x *= -1;
+//   // // option 1 - bounce
+//   // if (position.x >= width - radius || position.x <= radius) {
+//   //   velocity.x *= -1;
+//   // }
+
+//   // if (position.y >= height - radius || position.y <= radius) {
+//   //   velocity.y *= -1;
+//   // }
+
+//   // option 2 - wrap
+//   if (position.x > width) {
+//     position.x = 0;
+//   } else if (position.x < 0) {
+//     position.x = width;
 //   }
 
-//   if (position.y >= height - radius || position.y <= radius) {
-//     velocity.y *= -1;
+//   if (position.y > height) {
+//     position.y = 0;
+//   } else if (position.y < 0) {
+//     position.y = height;
 //   }
 
 //   stroke(0);
@@ -134,4 +148,26 @@
 //   noFill();
 //   box(270, 270, 270);
 //   pop();
+// }
+
+// // v5 vector subtraction
+// function setup() {
+//   createCanvas(640, 240);
+// }
+
+// function draw() {
+//   background(255);
+
+//   const mouse = createVector(mouseX, mouseY);
+//   const center = createVector(width / 2, height / 2);
+
+//   stroke(200);
+//   strokeWeight(4);
+//   line(0, 0, mouse.x, mouse.y);
+//   line(0, 0, center.x, center.y);
+
+//   mouse.sub(center);
+//   stroke(0);
+//   translate(width / 2, height / 2);
+//   line(0, 0, mouse.x, mouse.y);
 // }
