@@ -171,3 +171,18 @@
 //   translate(width / 2, height / 2);
 //   line(0, 0, mouse.x, mouse.y);
 // }
+
+// v6 mover
+let mover;
+
+function setup() {
+  createCanvas(640, 240);
+  mover = new Mover();
+}
+
+function draw() {
+  background(200);
+  mover.update();
+  mover.checkEdges();
+  mover.show();
+}
