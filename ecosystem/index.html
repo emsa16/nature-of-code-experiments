@@ -13,7 +13,33 @@
   </head>
 
   <body>
-    <script src="walker.js"></script>
+    <canvas id="mainCanvas"></canvas>
+
+    <div class="controls">
+      <div class="control">
+        <div class="control-text">
+          <label for="magnitude">Magnitude:</label>
+          <output id="magnitude-value"></output>
+        </div>
+        <input
+          type="range"
+          id="magnitude"
+          min="0"
+          max="25"
+          step="0.01"
+          value="0"
+        />
+      </div>
+      <div class="control">
+        <div class="control-text">
+          <label for="velocity">Velocity limit:</label>
+          <output id="velocity-value"></output>
+        </div>
+        <input type="range" id="velocity" min="0" max="10" step="1" value="2" />
+      </div>
+    </div>
+
+    <script src="creatures.js"></script>
     <script src="sketch.js"></script>
   </body>
 </html>

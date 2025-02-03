@@ -1,8 +1,23 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
 canvas {
   display: block;
+}
+
+.controls {
+  display: flex;
+
+  .control {
+    display: flex;
+    flex-direction: column;
+
+    .control-label {
+      display: flex;
+      gap: 10px;
+    }
+  }
 }
