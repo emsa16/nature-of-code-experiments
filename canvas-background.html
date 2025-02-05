@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Background with Overlay</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      canvas {
+        position: absolute;
+        z-index: -2;
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.93);
+        z-index: -1;
+      }
+
+      main {
+        max-width: 500px;
+        margin: 50px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="sketch"></canvas>
+    <div class="overlay"></div>
+    <main>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat
+        voluptas suscipit est corporis maiores, odio provident culpa odit vitae
+        eaque placeat quae nulla ipsa cum nihil aperiam at quas repudiandae!
+      </p>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
+    <script>
+      const xScale = 0.015;
+      const yScale = 0.02;
+      const gap = 11;
+      let tz = 0;
+
+      function setup() {
+        createCanvas(
+          document.body.clientWidth,
+          document.body.clientHeight,
+          document.getElementById("sketch")
+        );
+      }
+
+      function draw() {
+        background(255);
+        noStroke();
+        fill(0);
+
+        for (let x = gap / 2; x < width; x += gap) {
+          for (let y = gap / 2; y < height; y += gap) {
+            let noiseValue = noise(x * xScale, y * yScale, tz);
+            let diameter = noiseValue * gap;
+            circle(x, y, diameter);
+          }
+        }
+
+        tz += 0.05;
+      }
+    </script>
+  </body>
+</html>
