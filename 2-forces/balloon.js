@@ -17,11 +17,10 @@ class Balloon {
   }
 
   calculateDragForce() {
-    const velocity = this.velocity.mag();
-    const dragMagnitude = velocity * velocity * DRAG_CONSTANT;
-    this.dragForce = this.velocity.copy();
-    this.dragForce.mult(-1);
-    this.dragForce.setMag(dragMagnitude);
+    this.dragForce = p5.Vector.mult(this.velocity, -1);
+    const velocityMag = this.velocity.mag();
+    const dragMag = velocityMag * velocityMag * DRAG_CONSTANT;
+    this.dragForce.setMag(dragMag);
   }
 
   calculateWindForce() {
