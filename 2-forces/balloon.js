@@ -4,6 +4,7 @@ const WIND_LIMIT = 0.1;
 class Balloon {
   constructor() {
     this.tx = 0;
+    this.mass = 5;
     this.floatForce = createVector(0, -0.2);
     this.dragForce = createVector(0, 0);
     this.windForce = createVector(0, 0);
@@ -13,7 +14,8 @@ class Balloon {
   }
 
   applyForce(force) {
-    this.acceleration.add(force);
+    let f = p5.Vector.div(force, this.mass);
+    this.acceleration.add(f);
   }
 
   calculateDragForce() {
