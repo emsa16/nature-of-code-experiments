@@ -10,6 +10,7 @@ class Mover {
     this.velocity = createVector(0, 0);
     this.acceleration = createVector(0, 0);
     this.frictionMag = frictionCoefficient * NORMAL_FORCE;
+    this.dragForce = createVector(0, 0);
   }
 
   applyForce(force) {
@@ -59,5 +60,13 @@ class Mover {
       friction.setMag(this.frictionMag);
       this.applyForce(friction);
     }
+  }
+
+  applyDrag(dragCoefficient) {
+    this.dragForce = p5.Vector.mult(this.velocity, -1);
+    const velocityMag = this.velocity.mag();
+    const dragMag = velocityMag * velocityMag * dragCoefficient;
+    this.dragForce.setMag(dragMag);
+    this.applyForce(this.dragForce);
   }
 }

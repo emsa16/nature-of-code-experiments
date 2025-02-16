@@ -2,14 +2,19 @@
 let moverA;
 let moverB;
 let gravity;
+let liquid;
+const movers = [];
 
 function setup() {
   createCanvas(640, 640);
   // balloon = new Balloon();
   moverA = new Mover(1, width / 2, 30, 0.1);
+  movers.push(moverA);
   moverB = new Mover(3, 500, 100, 2);
+  movers.push(moverB);
 
   gravity = createVector(0, 0.1);
+  liquid = new Liquid(0, height / 2, width, height / 2, 0.01);
 }
 
 function draw() {
@@ -17,46 +22,53 @@ function draw() {
   // balloon.update();
   // balloon.show();
 
+  liquid.show();
+
+  let wind;
+  // let toss;
+
   if (mouseIsPressed) {
     // v1
-    // const wind = createVector(0.1, 0);
-    // moverA.applyForce(wind);
-    // moverB.applyForce(wind);
+    // wind = createVector(0.1, 0);
 
     // v2
-    const wind = createVector(mouseX, mouseY);
+    wind = createVector(mouseX, mouseY);
     const center = createVector(width / 2, height / 2);
     wind.sub(center);
     wind.mult(-1);
     wind.setMag(0.1);
-    moverA.applyForce(wind);
-    moverB.applyForce(wind);
 
     // // v3 tossing the mover
-    // const toss = createVector(mouseX, mouseY);
+    // toss = createVector(mouseX, mouseY);
     // toss.sub(moverA.position);
     // toss.mult(-1);
     // toss.setMag(4);
-    // moverA.velocity = toss;
   }
 
-  const gravityA = p5.Vector.mult(gravity, moverA.mass);
-  moverA.applyForce(gravityA);
-  // const wallForceA = calculateWallForce(moverA);
-  // moverA.applyForce(wallForceA);
-  moverA.applyFriction();
-  moverA.update();
-  moverA.show();
-  moverA.checkEdges();
+  for (const mover of movers) {
+    if (mouseIsPressed) {
+      // v1
+      // mover.applyForce(wind);
 
-  const gravityB = p5.Vector.mult(gravity, moverB.mass);
-  moverB.applyForce(gravityB);
-  // const wallForceB = calculateWallForce(moverB);
-  // moverB.applyForce(wallForceB);
-  moverB.applyFriction();
-  moverB.update();
-  moverB.show();
-  moverB.checkEdges();
+      // v2
+      mover.applyForce(wind);
+
+      // // v3 tossing the mover
+      // mover.velocity = toss;
+    }
+
+    const moverGravity = p5.Vector.mult(gravity, mover.mass);
+    mover.applyForce(moverGravity);
+    // const wallForce = calculateWallForce(mover);
+    // mover.applyForce(wallForce);
+    mover.applyFriction();
+    if (liquid.contains(mover)) {
+      mover.applyDrag(liquid.c);
+    }
+    mover.update();
+    mover.show();
+    mover.checkEdges();
+  }
 }
 
 // function calculateWallForce(mover) {
