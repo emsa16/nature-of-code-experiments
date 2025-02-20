@@ -1,6 +1,4 @@
 // let balloon;
-let moverA;
-let moverB;
 let gravity;
 let liquid;
 const movers = [];
@@ -8,12 +6,17 @@ const movers = [];
 function setup() {
   createCanvas(640, 640);
   // balloon = new Balloon();
-  moverA = new Mover(1, width / 2, 30, 0.1);
+  const moverA = new Mover(1, width / 2, 30, 0.1);
   movers.push(moverA);
-  moverB = new Mover(3, 500, 150, 2);
+  const moverB = new Mover(3, 500, 150, 2);
   movers.push(moverB);
-  moverC = new Mover(3, 100, 0, 2);
+  const moverC = new Mover(3, 100, 0, 2);
   movers.push(moverC);
+
+  const squareMover = new SquareMover(30, 200, 100, 0.1);
+  movers.push(squareMover);
+  const squareMoverB = new SquareMover(70, 400, 100, 0.1);
+  movers.push(squareMoverB);
 
   gravity = createVector(0, 0.1);
   liquid = new Liquid(0, height / 2, width, height / 2, 0.1);
