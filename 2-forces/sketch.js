@@ -10,11 +10,13 @@ function setup() {
   // balloon = new Balloon();
   moverA = new Mover(1, width / 2, 30, 0.1);
   movers.push(moverA);
-  moverB = new Mover(3, 500, 100, 2);
+  moverB = new Mover(3, 500, 150, 2);
   movers.push(moverB);
+  moverC = new Mover(3, 100, 0, 2);
+  movers.push(moverC);
 
   gravity = createVector(0, 0.1);
-  liquid = new Liquid(0, height / 2, width, height / 2, 0.01);
+  liquid = new Liquid(0, height / 2, width, height / 2, 0.1);
 }
 
 function draw() {

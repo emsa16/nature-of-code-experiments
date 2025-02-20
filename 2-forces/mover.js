@@ -67,6 +67,7 @@ class Mover {
     const velocityMag = this.velocity.mag();
     const dragMag = velocityMag * velocityMag * dragCoefficient;
     this.dragForce.setMag(dragMag);
+    this.dragForce.limit(velocityMag);
     this.applyForce(this.dragForce);
   }
 }
